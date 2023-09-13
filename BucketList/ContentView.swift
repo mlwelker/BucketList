@@ -18,7 +18,15 @@ struct ContentView: View {
     
     var body: some View {
         Map(coordinateRegion: $mapRegion, annotationItems: locations) { location in
-            MapMarker(coordinate: location.coordinate)
+            MapAnnotation(coordinate: location.coordinate) {
+                VStack {
+                    Circle()
+                        .stroke(.red, lineWidth: 2)
+                        .frame(width: 20, height: 20)
+                    
+                    Text(location.name)
+                }
+            }
         }
     }
 }

@@ -27,10 +27,13 @@ struct ContentView: View {
     var loadingState = LoadingState.loading
     
     var body: some View {
-        if Bool.random() {
-            Rectangle()
-        } else {
-            Circle()
+        switch loadingState {
+        case .loading:
+            LoadingView()
+        case .success:
+            SuccessView()
+        case .failed:
+            FailedView()
         }
     }
 }

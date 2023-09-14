@@ -9,14 +9,26 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             Map(coordinateRegion: $mapRegion, annotationItems: locations) { location in
-                MapMarker(coordinate: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude))
+                MapAnnotation(coordinate: location.coordinate) {
+                    VStack {
+                        Image(systemName: "star.circle")
+                            .resizable()
+                            .foregroundColor(.red)
+                            .frame(width: 44, height: 44)
+                            .background(.white)
+                            .clipShape(Circle())
+                        // NOTE: that frame size 44x44 is Apple's recommended smallest size for any interactive elements in your UI
+                        
+                        Text(location.name)
+                    }
+                }
             }
             .ignoresSafeArea()
             
             Circle()
                 .fill(.blue)
                 .opacity(0.3)
-                .frame(width: 32, height: 32)
+                .frame(width: 44, height: 44)
             
             VStack {
                 Spacer()
